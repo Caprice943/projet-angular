@@ -3,8 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { UserLdap } from '../model/user-ldap';
-import { UsersService } from '../service/users.service';
+import { UserLdap } from '../../model/user-ldap';
+import { UsersService } from '../../service/users.service';
 
 @Component({
   selector: 'app-ldap-list',
@@ -26,6 +26,14 @@ export class LdapListComponent implements OnInit, AfterViewInit {
     //this.dataSource.filterPredicate = (data: UserLdap, filter: string) => this.filterPredicate(data, filter);
 
     this.getUsers();
+  }
+
+  addUser() {
+    this.router.navigate(['/users/add']).then((e) => {
+      if (!e) {
+        console.log('Navigation has failed !');
+      }
+    });
   }
 
   filterPredicate(data, filter): boolean {
@@ -60,7 +68,7 @@ export class LdapListComponent implements OnInit, AfterViewInit {
   }
 
   edit(login: string) {
-    this.router.navigate(['/user', login]).then((e) => {
+    this.router.navigate(['/users', login]).then((e) => {
       if (!e) {
         console.log('Navigation has failed !');
       }
