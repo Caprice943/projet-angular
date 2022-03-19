@@ -45,16 +45,14 @@ export class LdapEditComponent extends LdapDetailComponent implements OnInit {
   }
 
   private getUser(): void {
-    const login = this.route.snapshot.paramMap.get('id');
+    const id = +this.route.snapshot.paramMap.get('id');
 
     this.processLoadRunning = true;
-    this.usersService.getUser(login).subscribe(
-      (user) => {
-        this.user = user;
+    this.usersService.getUser(id).subscribe(
+      (data) => {
+        this.user = data;
         this.copyUserToFormControl();
         this.processLoadRunning = false;
-        //console.log('LdapDetail getUser =');
-        //console.log(user);
       },
       (error) => {
         this.processLoadRunning = false;
